@@ -1,9 +1,17 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Globalization;
 
+var defaultName = "WorkshopUpload.extracted.json";
 
+Console.WriteLine("Enter for Default: (WorkshopUpload.extracted.json)");
 Console.Write("Map Name: ");
 var mapName = Console.ReadLine();
+
+if(string.IsNullOrWhiteSpace(mapName))
+{
+    mapName = defaultName;
+}
+
 var text = File.ReadAllText(mapName);
 
 
