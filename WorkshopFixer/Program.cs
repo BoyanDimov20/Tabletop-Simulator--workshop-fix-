@@ -59,6 +59,19 @@ void ReplaceJson(JToken token)
                 token.Parent.Parent.Replace(new JProperty(parent.Name, Convert.ToDouble(curr.Value.ToString(), CultureInfo.InvariantCulture)));
             }
         }
+        else if (prop.Name == "$numberLong")
+        {
+            if (token.Parent.Parent.Type == JTokenType.Array)
+            {
+                token.Parent.Replace(long.Parse(prop.Value.ToString()));
+            }
+            else if (token.Parent.Parent.Type == JTokenType.Property)
+            {
+                var curr = (JProperty)token;
+                var parent = (JProperty)token.Parent.Parent;
+                token.Parent.Parent.Replace(new JProperty(parent.Name, long.Parse(curr.Value.ToString())));
+            }
+        }
     }
     if (token.Next != null)
     {
